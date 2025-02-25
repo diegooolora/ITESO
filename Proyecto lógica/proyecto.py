@@ -52,3 +52,4 @@ for texto, comando in botones:
         fila += 1
 
 root.mainloop()
+
