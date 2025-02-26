@@ -1,15 +1,11 @@
 function generarTabla() {
-    let expresion = document.getElementById("expresion").value.trim();
+    // Definir la expresión lógica específica
+    let expresion = "(p→q)↔((¬p)∨q)";
 
-    // Extraer variables permitidas (todas las letras excepto "v")
-    let variables = [...new Set(expresion.match(/[a-z]/g))].filter(v => v !== 'v').sort();
+    // Extraer las variables de la expresión (en este caso solo p y q)
+    let variables = ['p', 'q'];  // Sabemos que solo tenemos p y q en esta expresión
 
-    if (variables.length === 0) {
-        alert("Ingrese una expresión válida con proposiciones lógicas.");
-        return;
-    }
-
-    let combinaciones = Math.pow(2, variables.length);
+    let combinaciones = Math.pow(2, variables.length);  // 2^2 = 4 combinaciones posibles
     let tablaHTML = "<table><tr>";
 
     // Crear encabezados de tabla
@@ -43,12 +39,11 @@ function generarTabla() {
 function evaluarExpresion(expresion, valores) {
     try {
         let expresionModificada = expresion
-            .replace(/¬/g, '!')
-            .replace(/∧/g, '&&')
-            .replace(/∨/g, '||')
-            .replace(/→/g, '<=')  // Corregir si se requiere otro comportamiento
-            .replace(/↔/g, '==')
-            .replace(/⊕/g, '^');
+            .replace(/¬/g, '!')  // Negación
+            .replace(/∧/g, '&&')  // Conjunción
+            .replace(/∨/g, '||')  // Disyunción
+            .replace(/→/g, '<=')  // Implicación
+            .replace(/↔/g, '=='); // Bicondicional
 
         // Reemplazar variables con sus valores correspondientes
         Object.keys(valores).forEach(v => {
