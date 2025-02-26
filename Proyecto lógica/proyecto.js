@@ -1,9 +1,9 @@
 function generarTabla() {
     // Definir la expresión lógica específica
-    let expresion = "(p→q)↔((¬p)∨q)";
+    let expresion = "";
 
     // Extraer las variables de la expresión (en este caso solo p y q)
-    let variables = ['p', 'q'];  // Sabemos que solo tenemos p y q en esta expresión
+    let variables = ['a-uw-z'];  // Sabemos que solo tenemos p y q en esta expresión
 
     let combinaciones = Math.pow(2, variables.length);  // 2^2 = 4 combinaciones posibles
     let tablaHTML = "<table><tr>";
