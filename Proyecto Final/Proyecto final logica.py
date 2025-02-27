@@ -14,7 +14,7 @@ OPERADORES = {
 
 def evaluar_expresion(expresion, valores, variables):
     for i, valor in enumerate(valores):
-        expresion = expresion.replace(variables[i], str(valor))  # Reemplaza las variables seleccionadas
+        expresion = expresion.replace(variables[i], str(valor))  
     
     for operador, python_operador in OPERADORES.items():
         expresion = expresion.replace(operador, python_operador)
@@ -25,7 +25,7 @@ def evaluar_expresion(expresion, valores, variables):
         return None  
 
 def contar_variables(expresion):
-    variables = set(re.findall(r'[p-t]', expresion))  # Busca p, q, r, s, t
+    variables = set(re.findall(r'[p-t]', expresion))  
     return list(variables)
 
 def generar_tabla_verdad():
@@ -45,7 +45,6 @@ def generar_tabla_verdad():
         messagebox.showerror("Error", "La expresión no puede contener más de 5 variables.")
         return
     
-    # Asegurar que p y q siempre sean los primeros encabezados si están presentes
     variables_seleccionadas.sort()
     if 'p' in variables_seleccionadas:
         variables_seleccionadas.remove('p')
@@ -56,7 +55,6 @@ def generar_tabla_verdad():
 
     combinaciones = list(itertools.product([True, False], repeat=len(variables_seleccionadas)))
 
-    # Limpiar la ventana de resultados
     for widget in frame_resultados.winfo_children():
         widget.destroy()
 
@@ -76,17 +74,14 @@ def agregar_operador(operador):
     entrada_expresion.insert(tk.END, operador)
 
 def borrar_expresion():
-    entrada_expresion.delete(0, tk.END)  # Borra el contenido del campo de entrada
+    entrada_expresion.delete(0, tk.END)  
 
-# Crear la ventana principal
 ventana = tk.Tk()
 ventana.title("Generador de Tabla de Verdad")
 
-ventana.geometry("400x650")  # Ajustar tamaño de ventana
-
+ventana.geometry("400x650")  
 ventana.config(bg="#FFFFFF")
 
-# Marco para la entrada
 frame_inputs = tk.Frame(ventana, bg="#FFFFFF")
 frame_inputs.pack(pady=20)
 
@@ -94,7 +89,6 @@ tk.Label(frame_inputs, text="Expresión lógica:", bg="#FFFFFF", font=("Arial", 
 entrada_expresion = tk.Entry(frame_inputs, width=18, font=("Arial", 12))  
 entrada_expresion.pack(pady=10)
 
-# Botones para las variables p, q, r, s, t
 frame_variables = tk.Frame(ventana, bg="#FFFFFF")
 frame_variables.pack(pady=10)
 
@@ -113,7 +107,6 @@ boton_s.grid(row=0, column=3, padx=5)
 boton_t = tk.Button(frame_variables, text="t", width=4, height=1, font=("Arial", 12), command=lambda: agregar_operador("t"))
 boton_t.grid(row=0, column=4, padx=5)
 
-# Marco para los botones de operadores
 frame_operadores = tk.Frame(ventana, bg="#FFFFFF")
 frame_operadores.pack(pady=10)
 
@@ -135,22 +128,18 @@ boton_bicondicional.grid(row=1, column=1, padx=5)
 boton_xor = tk.Button(frame_operadores, text="⊕", width=4, height=1, font=("Arial", 12), command=lambda: agregar_operador("⊕"))
 boton_xor.grid(row=1, column=2, padx=5)
 
-# Botones para paréntesis
 boton_parentesis_abrir = tk.Button(frame_operadores, text="(", width=4, height=1, font=("Arial", 12), command=lambda: agregar_operador("("))
 boton_parentesis_abrir.grid(row=2, column=0, padx=5)
 
 boton_parentesis_cerrar = tk.Button(frame_operadores, text=")", width=4, height=1, font=("Arial", 12), command=lambda: agregar_operador(")"))
 boton_parentesis_cerrar.grid(row=2, column=1, padx=5)
 
-# Botón para generar la tabla de verdad
 boton_generar = tk.Button(frame_inputs, text="Generar Tabla de Verdad", command=generar_tabla_verdad, font=("Arial", 12), bg="#4CAF50", fg="white")
 boton_generar.pack(pady=10)
 
-# Botón para borrar la expresión
 boton_borrar = tk.Button(frame_inputs, text="Borrar Expresión", command=borrar_expresion, font=("Arial", 12), bg="#FF5722", fg="white")
 boton_borrar.pack(pady=10)
 
-# Marco para los resultados
 frame_resultados = tk.Frame(ventana)
 frame_resultados.pack(pady=20)
 
