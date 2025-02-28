@@ -86,7 +86,7 @@ frame_inputs = tk.Frame(ventana, bg="#FFFFFF")
 frame_inputs.pack(pady=20)
 
 tk.Label(frame_inputs, text="Expresión lógica:", bg="#FFFFFF", font=("Arial", 12)).pack()
-entrada_expresion = tk.Entry(frame_inputs, width=18, font=("Arial", 12))  
+entrada_expresion = tk.Entry(frame_inputs, width=25, font=("Arial", 12))  
 entrada_expresion.pack(pady=10)
 
 frame_variables = tk.Frame(ventana, bg="#FFFFFF")
